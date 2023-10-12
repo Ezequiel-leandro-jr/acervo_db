@@ -1,7 +1,12 @@
 (async () => {
-    const database = require('ACERVO_DB/config');
-    const Produto = require('ACERVO_DB/produto')
-    await database.sync();//verifica os modelos do projeto comparado com as tabelas do db e garante que ambos sejam iguais
+    const database = require('./config');
+    const Produto = require('./models/produto');
+    try {
+        const resultado = await database.sync();
+        console.log('Conexão realizada com sucesso!\n', resultado);
+    } catch (error) {
+        console.log('Erro: conexão mal-sucedida!\n', error);
+    }//verifica os modelos do projeto comparado com as tabelas do db e garante que ambos sejam iguais
 
     //INSERT de novo produto (CREATE)
     const novoProduto = await Produto.create({
@@ -16,20 +21,20 @@
     console.log(produtos);
 
     //LISTAR produto buscado por ID (READ)
-    const produto = await Produto.findByPk(1);
-    console.log(produto);
+    const pRoduto = await Produto.findByPk(1);
+    console.log(pRoduto);
 
     //ALTERAÇÃO de um produto (UPDATE)
-    const produto = await Produto.findByPk(1);
-    console.log(produto);
+    const prOduto = await Produto.findByPk(1);
+    console.log(prOduto);
 
-    produto.descricao = 'Fiz uma alteração';
-    await produto.save();
+    prOduto.descricao = 'Fiz uma alteração';
+    await prOduto.save();
 
     //DELETAR um produto (DELETE)
-    const produto = await Produto.findByPk(1);
-    console.log(produto);
+    const prodUto = await Produto.findByPk(1);
+    console.log(prodUto);
 
-    await produto.destroy();
+    await prodUto.destroy();
 
 })();
